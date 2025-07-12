@@ -1,5 +1,3 @@
-
-
 # Voting Simulation
 
-![System architecture](image.png)
+![System architecture](system-architecture/image.png)
