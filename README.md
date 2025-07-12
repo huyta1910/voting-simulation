@@ -2,4 +2,4 @@
 
 # Voting Simulation
 
-![System architecture](image.png)
+![System architecture](ystem-architecture\image.png)
