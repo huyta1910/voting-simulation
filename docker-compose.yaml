@@ -82,21 +82,34 @@ services:
       SPARK_WORKER_MEMORY: 1g
       SPARK_MASTER_URL: spark://spark-master:7077
 
-  # superset:
-  #   image: apache/superset:latest
-  #   container_name: superset
-  #   ports:
-  #     - "8088:8088"
-  #   environment:
-  #     SUPERSET_DATABASE_HOST: postgres
-  #     SUPERSET_DATABASE_PORT: 5432
-  #     SUPERSET_DATABASE_USER: postgres
-  #     SUPERSET_DATABASE_PASSWORD: postgres
-  #     SUPERSET_DATABASE_DB: voting
-  #     SUPERSET_SECRET_KEY: 'your-secret-key'
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy
-  #   restart: always
-  #   volumes:
-  #     - superset_home:/app/superset_home
+  redis:
+    image: redis:latest
+    container_name: redis
+    hostname: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - confluent
+
+  superset:
+    image: apache/superset:latest
+    container_name: superset
+    ports:
+      - "8088:8088"
+    environment:
+      SUPERSET_DATABASE_HOST: postgres
+      SUPERSET_DATABASE_PORT: 5432
+      SUPERSET_DATABASE_USER: postgres
+      SUPERSET_DATABASE_PASSWORD: postgres
+      SUPERSET_DATABASE_DB: voting
+      SUPERSET_SECRET_KEY: 'secret-key'
+      SUPERSET_ADMIN_USERNAME: admin
+      SUPERSET_ADMIN_PASSWORD: admin
+      SUPERSET_ADMIN_EMAIL: admin@admin.com
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
+    volumes:
+      - superset_home:/app/superset_home
+  

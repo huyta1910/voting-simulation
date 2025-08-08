@@ -114,7 +114,7 @@ if __name__ == "__main__":
         create_table(conn,cur)
 
         cur.execute("""
-                    SELECT * FROM candidates
+                    SELECT * FROM candidates```````````````
                     """)
 
         candidates = cur.fetchall()
@@ -132,7 +132,7 @@ if __name__ == "__main__":
                 conn.commit()
         for i in range (1000):
             voter_data = generate_voter_data()
-            print(voter_data)
+            # print(voter_data)
             # insert_voters(conn,cur,voter_data)
 
     except Exception as e:
