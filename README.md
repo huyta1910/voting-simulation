@@ -1,12 +1,22 @@
 # Voting Simulation
 
-![System architecture](system-architecture/image.png)
 
 ## Introduction
 
 This project is a voting simulation system designed to demonstrate a modern data pipeline and analytics stack. It leverages Apache Kafka for streaming, Apache Spark for processing, PostgreSQL for storage, and Apache Superset for dashboarding and analytics. The system is orchestrated using Docker Compose for easy setup and reproducibility.
 
 ## Architecture
+![System architecture](system-architecture/image.png)
+
+### Tech Stack
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Kafka-231F20?logo=apachekafka&logoColor=white" alt="Kafka" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/Spark-E25A1C?logo=apachespark&logoColor=white" alt="Apache Spark" />
+  <img src="https://img.shields.io/badge/Superset-FF5A5F?logo=apache%20superset&logoColor=white" alt="Apache Superset" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white" alt="Docker" />
+</p>
 
 The system consists of the following main components:
 - **Zookeeper & Kafka**: For event streaming and message brokering.
