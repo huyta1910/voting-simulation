@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This project is a voting simulation system designed to demonstrate a modern data pipeline and analytics stack. It leverages Apache Kafka for streaming, Apache Spark for processing, PostgreSQL for storage, and Apache Superset for dashboarding and analytics. The system is orchestrated using Docker Compose for easy setup and reproducibility.
+This project is a voting simulation system designed to demonstrate a modern data pipeline and analytics stack. It leverages Apache Kafka for streaming, Apache Spark for processing, PostgreSQL for storage, and Apache Superset for dashboarding and analytics. The system is orchestrated using Docker Compose for easy setup and reproducibility. 
 
 ## Architecture
 ![System architecture](system-architecture/image.png)
