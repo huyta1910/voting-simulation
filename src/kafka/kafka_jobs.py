@@ -1,9 +1,10 @@
-
 import psycopg2
 import simplejson as json
 from confluent_kafka import SerializingProducer
-from src.etl.db import create_tables, insert_voters
-from src.kafka.producer_utils import generate_voter_data, generate_candidate_data, delivery_report, voters_topic
+from src.data.db_utils import create_tables, insert_voters
+from src.kafka.producer_utils import delivery_report, voters_topic
+from src.data.fetch_data import generate_voter_data, generate_candidate_data
+
 
 
 if __name__ == "__main__":
