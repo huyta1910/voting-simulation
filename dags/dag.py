@@ -1,15 +1,9 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
-
-def start_task():
-    print("Workflow started.")
-
-def process_data():
-    print("Processing data with Spark/Kafka...")
-
-def end_task():
-    print("Workflow finished.")
+from src.data.fetch_data import generate_voter_data
+from src.data.db_utils import insert_voters
+import psycopg2
 
 default_args = {
     'owner': 'airflow',
@@ -18,31 +12,37 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
 }
 
+def fetch_voter_task():
+    # Fetch one voter and ingest to MinIO
+    voter = generate_voter_data(ingest_to_minio=True)
+    return voter
+
+def ingest_postgres_task(voter):
+    # Ingest to Postgres
+    conn = psycopg2.connect("host=postgres dbname=voting user=postgres password=postgres")
+    cur = conn.cursor()
+    insert_voters(conn, cur, voter)
+    conn.close()
+
 dag = DAG(
     'voting_workflow',
     default_args=default_args,
-    description='This is the voting workflow',
+    description='Orchestrate fetch and ingest of one voter record',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2025, 8, 8),
     catchup=False,
 )
 
-start = PythonOperator(
-    task_id='start',
-    python_callable=start_task,
+fetch_voter = PythonOperator(
+    task_id='fetch_voter',
+    python_callable=fetch_voter_task,
     dag=dag,
 )
 
-process = PythonOperator(
-    task_id='process_data',
-    python_callable=process_data,
+ingest_postgres = PythonOperator(
+    task_id='ingest_postgres',
+    python_callable=lambda: ingest_postgres_task(fetch_voter_task()),
     dag=dag,
 )
 
-end = PythonOperator(
-    task_id='end',
-    python_callable=end_task,
-    dag=dag,
-)
-
-start >> process >> end
+fetch_voter >> ingest_postgres
