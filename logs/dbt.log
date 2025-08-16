@@ -1,0 +1,30 @@
+[0m22:54:08.768192 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000027336D0A320>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000273398D9390>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000273398D9180>]}
+
+
+============================== 22:54:08.773004 | b356045e-c532-4ebf-8714-023f7785a1b9 ==============================
+[0m22:54:08.773004 [info ] [MainThread]: Running with dbt=1.7.9
+[0m22:54:08.774047 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'use_experimental_parser': 'False', 'cache_selected_only': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\Victus16\\.dbt', 'debug': 'False', 'static_parser': 'True', 'log_cache_events': 'False', 'log_format': 'default', 'quiet': 'False', 'use_colors': 'True', 'partial_parse': 'True', 'version_check': 'True', 'log_path': 'logs', 'introspect': 'True', 'no_print': 'None', 'fail_fast': 'False', 'invocation_command': 'dbt init voting_dbt', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'send_anonymous_usage_stats': 'True', 'indirect_selection': 'eager', 'target_path': 'None', 'write_json': 'True'}
+[0m22:54:08.775088 [warn ] [MainThread]: [ConfigFolderDirectory]: Unable to parse dict {'dir': WindowsPath('C:/Users/Victus16/.dbt')}
+[0m22:54:08.775612 [info ] [MainThread]: Creating dbt configuration folder at 
+[0m22:54:08.777699 [debug] [MainThread]: Starter project path: C:\Users\Victus16\AppData\Local\Programs\Python\Python310\lib\site-packages\dbt\include\starter_project
+[0m22:54:08.841814 [info ] [MainThread]: 
+Your new dbt project "voting_dbt" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m22:54:08.842820 [info ] [MainThread]: Setting up your profile.
+[0m22:56:22.155581 [info ] [MainThread]: Profile voting_dbt written to C:\Users\Victus16\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m22:56:22.156589 [debug] [MainThread]: Command `dbt init` succeeded at 22:56:22.156589 after 133.41 seconds
+[0m22:56:22.157612 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000027336D0A320>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002733928A0E0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000273398D90C0>]}
+[0m22:56:22.157612 [debug] [MainThread]: Flushing usage events

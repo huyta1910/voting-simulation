@@ -1,0 +1,50 @@
+
+version: 2
+
+models:
+  - name: my_first_dbt_model
+    description: "A starter dbt model"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+  - name: voters
+    description: "Table containing all voter records."
+    columns:
+      - name: voter_id
+        description: "Unique identifier for each voter."
+        tests:
+          - unique
+          - not_null
+      - name: voter_name
+        description: "Name of the voter."
+        tests:
+          - not_null
+      - name: date_of_birth
+        description: "Date of birth of the voter."
+      - name: gender
+        description: "Gender of the voter."
+      - name: nationality
+        description: "Nationality of the voter."
+      - name: registration_number
+        description: "Registration number."
+      - name: address_street
+        description: "Street address."
+      - name: address_city
+        description: "City."
+      - name: address_state
+        description: "State."
+      - name: address_country
+        description: "Country."
+      - name: address_postcode
+        description: "Postcode."
+      - name: email
+        description: "Email address."
+      - name: phone_number
+        description: "Phone number."
+      - name: cell_number
+        description: "Cell number."
+      - name: picture
+        description: "Picture URL."
+      - name: registered_age
+        description: "Registered age."

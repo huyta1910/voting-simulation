@@ -5,7 +5,7 @@ from src.data.db_utils import create_tables, insert_voters
 from src.kafka.producer_utils import delivery_report, voters_topic
 from src.data.fetch_data import generate_voter_data, generate_candidate_data
 
-
+TARGET_VOTERS_COUNT = 1000
 
 if __name__ == "__main__":
     conn = psycopg2.connect("host=localhost dbname=voting user=postgres password=postgres")
@@ -30,17 +30,25 @@ if __name__ == "__main__":
                 candidate['candidate_id'], candidate['candidate_name'], candidate['party_affiliation'], candidate['biography'],
                 candidate['campaign_platform'], candidate['photo_url']))
             conn.commit()
+    try:
+        for i in range(TARGET_VOTERS_COUNT):
+            voter_data = generate_voter_data()
+            insert_voters(conn, cur, voter_data)
 
-    for i in range(1000):
-        voter_data = generate_voter_data()
-        insert_voters(conn, cur, voter_data)
+            producer.produce(
+                voters_topic,
+                key=voter_data["voter_id"],
+                value=json.dumps(voter_data),
+                on_delivery=delivery_report
+            )
 
-        producer.produce(
-            voters_topic,
-            key=voter_data["voter_id"],
-            value=json.dumps(voter_data),
-            on_delivery=delivery_report
-        )
-
-        print(f'Produced voter {i}, data: {voter_data}')
-        producer.flush()
+            print(f'Produced voter {i} \ndata: {voter_data}')
+            producer.flush()
+    except KeyboardInterrupt:
+        print(f"\nStream stopped by user at {i}/{TARGET_VOTERS_COUNT}.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        print("\nJob Finished.")
+        conn.close()
+        print("Database connection closed.")

@@ -1,4 +1,3 @@
-
 import random
 import requests
 import simplejson as json
